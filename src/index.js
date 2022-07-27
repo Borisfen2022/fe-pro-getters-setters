@@ -20,19 +20,17 @@ export const school = {
     6: new Student('Eugene', [97, 34, 78, 85, 98, 65]),
     7: new Student('Ivan', [76, 89, 78, 98, 98, 99, 89, 96]),
   },
-  get allGrades() {
-    return Object.keys(this.students).map(
-      (stIndex) => +this.students[stIndex].averageGrade.toFixed()
-    );
+  get allStudentGrades() {
+    return Object.keys(this.students).map((stIndex) => ({
+      grade: +this.students[stIndex].averageGrade.toFixed(),
+      name: this.students[stIndex].name,
+    }));
   },
   findRangeBetweenStudentGrade(from, to) {
-    let result = [];
-    this.allGrades.forEach((grade, index) => {
-      if (grade >= from && grade <= to) {
-        result = [...result, this.students[index].name];
-      }
-    });
-    return result.join(', ');
+    return this.allStudentGrades
+      .filter((student) => student.grade >= from && student.grade <= to)
+      .map((item) => item.name)
+      .join(', ');
   },
   get aGradeStudents() {
     return this.findRangeBetweenStudentGrade(90, 100);
