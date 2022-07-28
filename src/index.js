@@ -21,9 +21,9 @@ export const school = {
     7: new Student('Ivan', [76, 89, 78, 98, 98, 99, 89, 96]),
   },
   get allStudentGrades() {
-    return Object.keys(this.students).map((stIndex) => ({
-      grade: +this.students[stIndex].averageGrade.toFixed(),
-      name: this.students[stIndex].name,
+    return Object.values(this.students).map((student) => ({
+      grade: student.averageGrade.toFixed(),
+      name: student.name,
     }));
   },
   findRangeBetweenStudentGrade(from, to) {
